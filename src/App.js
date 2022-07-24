@@ -1,46 +1,39 @@
-import "./App.css";
 import { useEffect, useState } from "react";
-import TopMenu from "./Component/TopMenu";
-import Search from "./Component/Search";
-import EmployeeAdd from "./Component/EmployeeAdd";
-import EmployeeList from "./Component/EmployeeList";
 import EmployeeService from "./services/EmployeeService";
-import { Grid, TextField } from "@mui/material";
+import Topmenu from "./components/TopMenu";
+import Search from "./components/Search";
+import EmployeeList from "./components/EmployeeList";
+import EmployeeAdd from "./components/EmployeeAdd";
+import { Grid } from "@mui/material";
+import EmployeeUpdate from "./components/EmployeeUpdate";
 
 function App() {
   const employeeService = new EmployeeService();
   const [refresh, setRefresh] = useState(false);
   const [employees, setEmployees] = useState([]);
-  const [filter,setFilter]=useState("");
+  const [filter, setFilter] = useState("");
 
-
-
-  const onFilterChange = (e) => {
-    setFilter(e.target.value);
-    console.log(filter)
-    filterEmployee(filter)
+  const handleClick = (filter) => {
+    setFilter(filter);
+    setRefresh(true);
+    
   };
-
-  const filterEmployee = async (filter) => {
-    const {data}= await employeeService.getFilterEmployee(filter).then((resp) =>resp );
-    return data;
-  };
-
-
+  
 
   useEffect(() => {
-    employeeService.getAllEmployees().then((resp) => setEmployees(resp.data));
-  }, [refresh]);
+  employeeService.getFilterEmployee(filter).then((resp)=>setEmployees(resp.data))
+}, [refresh]);
+
 
   return (
     <Grid fluid>
       <Grid item>
-
-        <TextField onChange={(e)=>onFilterChange(e)}></TextField>
-        <TopMenu />
-        <Search/>
+        <Topmenu />
+        <Search 
+        handleClick={handleClick}
+        />
         <Grid container>
-          <Grid item xs={8}>
+          <Grid item xs={4}>
             <EmployeeList
               employees={employees}
               setRefresh={setRefresh}
@@ -49,6 +42,9 @@ function App() {
           </Grid>
           <Grid item xs={4}>
             <EmployeeAdd setRefresh={setRefresh} refresh={refresh} />
+          </Grid>
+          <Grid item xs={4}>
+            <EmployeeUpdate setRefresh={setRefresh} refresh={refresh} />
           </Grid>
         </Grid>
       </Grid>

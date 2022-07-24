@@ -21,10 +21,15 @@ class EmployeeService{
             return {status,data};
         }
 
-        async getFilterEmployee(str){
-            const {data}= await axios.get(this.baseUrl+"getfilter?firstName="+str).then(resp=>resp);
-            //console.log(data)
-            return data;
+        async getFilterEmployee(filter){
+            const {data,status}= await axios.get(this.baseUrl+"getfilter?firstName="+filter).then(resp=>resp);
+            console.log(data)
+            return {data,status};
+        }
+        async updateEmployee(body){
+            const {status}= await axios.put(this.baseUrl+"update/"+body.id ,body ).then(resp=>resp);
+            console.log(status)
+            return {status};
         }
 }
 export default EmployeeService;
