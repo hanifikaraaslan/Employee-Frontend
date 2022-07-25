@@ -16,12 +16,11 @@ function App() {
   const handleClick = (filter) => {
     setFilter(filter);
     setRefresh(true);
-    
   };
   
 
   useEffect(() => {
-  employeeService.getFilterEmployee(filter).then((resp)=>setEmployees(resp.data))
+  employeeService.getFilterEmployee(filter).then((resp)=>setEmployees(resp.data));
 }, [refresh]);
 
 
@@ -30,7 +29,7 @@ function App() {
       <Grid item>
         <Topmenu />
         <Search 
-        handleClick={handleClick}
+          setEmployees={setEmployees}
         />
         <Grid container>
           <Grid item xs={4}>

@@ -23,26 +23,26 @@ export default function EmployeeAdd({setRefresh, refresh}) {
     console.log(employee);
   }
 
-  const onFirstNameChange = (e) => {
-    console.log(e.target.value);
-    setFirstName(e.target.value);
-  }
+  // const onFirstNameChange = (e) => {
+  //   console.log(e.target.value);
+  //   setFirstName(e.target.value);
+  // }
 
-  const onLastNameChange = (e) => {
-    console.log(e.target.value);
-    setLastName(e.target.value);
-  }
+  // const onLastNameChange = (e) => {
+  //   console.log(e.target.value);
+  //   setLastName(e.target.value);
+  // }
 
   return (
     <div>
     <Stack direction="column" spacing={2} sx={{m:2}}>
 
-     <TextField name="firstName" 
-     onChange={(e) => onFirstNameChange(e)}
+    <TextField name="firstName" 
+     onChange={e => setFirstName(e.target.value)}
      placeholder='firstName' />
 
      <TextField name="lastName" 
-     onChange = {(e) => onLastNameChange(e)} 
+     onChange = {e => setLastName(e.target.value)} 
      placeholder='lastName' 
      />
      

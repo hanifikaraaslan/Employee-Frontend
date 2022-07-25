@@ -23,39 +23,39 @@ export default function EmployeeUpdate({setRefresh, refresh}) {
   }
  
  
-  const onIdChange = (e) => {
-    console.log(e.target.value);
-    setId(e.target.value);
-  }
+  // const onIdChange = (e) => {
+  //   console.log(e.target.value);
+  //   setId(e.target.value);
+  // }
 
-  const onFirstNameChange = (e) => {
-    console.log(e.target.value);
-    setFirstName(e.target.value);
-  }
+  // const onFirstNameChange = (e) => {
+  //   console.log(e.target.value);
+  //   setFirstName(e.target.value);
+  // }
 
-  const onLastNameChange = (e) => {
-    console.log(e.target.value);
-    setLastName(e.target.value);
-  }
+  // const onLastNameChange = (e) => {
+  //   console.log(e.target.value);
+  //   setLastName(e.target.value);
+  // }
 
   return (
     <div>
        <Stack direction="column" spacing={2} sx={{m:2}}>
         
     <TextField name="id" 
-     onChange={(e) => onIdChange(e)}
+     onChange={e => setId(e.target.value)}
      placeholder='id' />
      
      <TextField name="firstName" 
-     onChange={(e) => onFirstNameChange(e)}
+     onChange={e => setFirstName(e.target.value)}
      placeholder='firstName' />
 
      <TextField name="lastName" 
-     onChange = {(e) => onLastNameChange(e)} 
+     onChange = {e => setLastName(e.target.value)} 
      placeholder='lastName' 
      />
      
-     <Button variant='contained' onClick={() => handleUpdate()} >Add </Button>
+     <Button variant='contained' onClick={() => handleUpdate()} >Update </Button>
     
     </Stack>
     </div>
